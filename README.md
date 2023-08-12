@@ -38,20 +38,20 @@
 
 
 - 2일차:
-  -[x] 회원 api 완료
-  -[x] 커스텀 예외처리
-  -[x] 게시글 api 완료
-  -[x] query dsl 동적 검색 적용(게시글 검색,정렬)
-  -[x] vue.js 연동(포트를 선언시 화면이 나오는가??)
-  -[x] 회원 api 테스트 코드 작성
-  -[x] 게시글 api 테스트 코드 작성
-  -[x] swagger 적용(모델 어노테이션 및 에러 응답 설정)
-  -[ ] SpringSecurity 적용
-  -[ ] jwt 로그인 적용하기.
-  -[ ] swagger security 설정
+  - [x] 회원 api 완료
+  - [x] 커스텀 예외처리
+  - [x] 게시글 api 완료
+  - [x] query dsl 동적 검색 적용(게시글 검색,정렬)
+  - [x] vue.js 연동(포트를 선언시 화면이 나오는가??)
+  - [x] 회원 api 테스트 코드 작성
+  - [x] 게시글 api 테스트 코드 작성
+  - [x] swagger 적용(모델 어노테이션 및 에러 응답 설정)
 
 
 - 3일차:
-  -[ ] post, member 테스트 코드 작성하기.
-  -[ ] vue.js 화면(로그인 화면)
-  -[ ] 화면 완성(게시판 화면)
+  - [ ] post, member 테스트 코드 작성하기.
+  - [ ] vue.js 화면(로그인 화면)
+  - [ ] 화면 완성(게시판 화면)
+  - [ ] SpringSecurity 적용
+  - [ ] jwt 로그인 적용하기.
+  - [ ] swagger security 설정
