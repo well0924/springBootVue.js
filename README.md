@@ -22,13 +22,13 @@
 
 ## featured 
 
--[x] 회원 api crud
--[x] 게시글 api crud
--[x] rest api로 설계
--[ ] jwt를 활용한 로그인 기능(spring security)
--[x] query dsl을 활용한 동적 검색 및 정렬
--[ ] vue.js를 활용한 프론트 처리
--[x] swagger를 활용한 api 문서작성.
+- [x] 회원 api crud
+- [x] 게시글 api crud
+- [x] rest api로 설계
+- [ ] jwt를 활용한 로그인 기능(spring security)
+- [x] query dsl을 활용한 동적 검색 및 정렬
+- [ ] vue.js를 활용한 프론트 처리
+- [x] swagger를 활용한 api 문서작성.
 
 ## 개발 일지
 
@@ -43,15 +43,15 @@
   - [x] 게시글 api 완료
   - [x] query dsl 동적 검색 적용(게시글 검색,정렬)
   - [x] vue.js 연동(포트를 선언시 화면이 나오는가??)
-  - [x] 회원 api 테스트 코드 작성
-  - [x] 게시글 api 테스트 코드 작성
   - [x] swagger 적용(모델 어노테이션 및 에러 응답 설정)
 
-
 - 3일차:
-  - [ ] post, member 테스트 코드 작성하기.
-  - [ ] vue.js 화면(로그인 화면)
+  - [x] post, member 테스트 코드 작성하기.
+  - [x] vue.js 화면(로그인 화면)
+  - [x] SpringSecurity 적용
+  - [x] jwt 로그인 적용하기.
+  - [x] swagger security 설정
+
+- 4일차
   - [ ] 화면 완성(게시판 화면)
-  - [ ] SpringSecurity 적용
-  - [ ] jwt 로그인 적용하기.
-  - [ ] swagger security 설정
+  - [ ] 문서 작업
