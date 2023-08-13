@@ -42,22 +42,20 @@ public class MemberService {
 
     //회원 조회
     @Transactional
-    public MemberResponse memberDetail(Long id){
-        Member member = memberRepository.findById(id).orElseThrow(()->new ApiException(CustomEnum.MEMBER_01));
-
-        MemberResponse memberResponse = memberMapper.entityToDto(member);
-
-        return memberResponse;
+    public MemberResponse memberDetail(Long id){;
+        return memberRepository.findById(id)
+                .map(memberMapper::entityToDto)
+                .orElseThrow(()->new ApiException(CustomEnum.MEMBER_01));
     }
 
     //회원 작성
     public Member memberCreate(MemberRequest memberRequest){
+
+        memberRequest.setPassword(memberRequest.getPassword());
         memberRequest.setUserName(memberRequest.getUserName());
         memberRequest.setUserEmail(memberRequest.getUserEmail());
         memberRequest.setUserAge(memberRequest.getUserAge());
-
-        Member member = memberMapper.dtoToEntity(memberRequest);
-        member = memberRepository.save(member);
+        Member member = memberRepository.save(memberMapper.dtoToEntity(memberRequest));
         return member;
     }
 
@@ -75,7 +73,7 @@ public class MemberService {
     //회원 삭제
     @Transactional
     public void memberDelete(Long id){
-        Optional<Member> member = Optional.of(memberRepository.findById(id).orElseThrow());
+        Optional<Member> member = Optional.of(memberRepository.findById(id).orElseThrow(()->new ApiException(CustomEnum.MEMBER_01)));
         memberRepository.deleteById(id);
     }
 

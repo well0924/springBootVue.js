@@ -24,7 +24,7 @@ public class Post extends BaseTime {
     private String title;
     private String contents;
     private String author;
-
+    
     @Builder
     public Post(Long id,String title,String contents,String author){
         this.id = id;
@@ -38,4 +38,5 @@ public class Post extends BaseTime {
         this.title = post.getTitle();
         this.contents = post.getContents();
     }
+
 }

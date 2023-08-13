@@ -28,9 +28,11 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostResponse>postResponseList(){
         List<Post>postList = postRepository.findAll();
+
         if(postList.isEmpty()){
             throw new ApiException(CustomEnum.POST_01);
         }
+
         return postList.stream()
                 .map(post->new PostResponse(
                         post.getId(),
@@ -78,14 +80,14 @@ public class PostService {
 
     //게시글 수정
     public Post postUpdate(Long id,PostRequest postRequest){
-        Optional<Post>detail = Optional.of(postRepository.findById(id).orElseThrow());
+        Optional<Post>detail = Optional.of(postRepository.findById(id).orElseThrow(()->new ApiException(CustomEnum.POST_01)));
         detail.ifPresent(post -> post.postUpdate(postRequest));
         return postRepository.save(detail.get());
     }
 
     //게시글 삭제
     public void postDelete(Long id){
-        Optional<Post>detail = Optional.of(postRepository.findById(id).orElseThrow());
+        Optional<Post>detail = Optional.of(postRepository.findById(id).orElseThrow(()->new ApiException(CustomEnum.POST_01)));
         postRepository.deleteById(id);
     }
 }

@@ -37,7 +37,13 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
         int pageCount =jpaQueryFactory.select(QPost.post).from(QPost.post).fetch().size();
 
         for(Post post:list){
-            PostResponse response = new PostResponse(post.getId(),post.getTitle(),post.getContents(),post.getAuthor(),post.getCreatedTime(),post.getUpdatedTime());
+            PostResponse response = new PostResponse(post.getId(),
+                    post.getTitle(),
+                    post.getContents(),
+                    post.getAuthor(),
+                    post.getCreatedTime(),
+                    post.getUpdatedTime());
+
             postResponseList.add(response);
         }
         return new PageImpl<>(postResponseList,pageable,pageCount);
@@ -51,7 +57,13 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
         int searchCount = searchResultCount(searchType,keyword,pageable);
 
         for(Post post:postList){
-            PostResponse response = new PostResponse(post.getId(),post.getTitle(),post.getContents(),post.getAuthor(),post.getCreatedTime(),post.getUpdatedTime());
+            PostResponse response = new PostResponse(
+                    post.getId(),
+                    post.getTitle(),
+                    post.getContents(),
+                    post.getAuthor(),
+                    post.getCreatedTime(),
+                    post.getUpdatedTime());
             postResponseList.add(response);
         }
 

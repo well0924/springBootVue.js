@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 //1.componentModel은 map struct에 자동으로 주입
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
+
     MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
 
     //entity -> dto

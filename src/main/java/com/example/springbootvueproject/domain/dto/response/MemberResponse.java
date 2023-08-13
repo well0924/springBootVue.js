@@ -1,15 +1,12 @@
 package com.example.springbootvueproject.domain.dto.response;
 
-import com.example.springbootvueproject.domain.Member;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @ToString
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class MemberResponse {
     private Long id;

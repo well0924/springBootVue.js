@@ -5,9 +5,8 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
 @Builder
-@NoArgsConstructor
+@ToString
 @AllArgsConstructor
 public class PostResponse {
     private Long id;
