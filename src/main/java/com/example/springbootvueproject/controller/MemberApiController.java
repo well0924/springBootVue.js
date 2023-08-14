@@ -1,9 +1,11 @@
 package com.example.springbootvueproject.controller;
 
 import com.example.springbootvueproject.domain.Member;
+import com.example.springbootvueproject.domain.dto.request.LoginDto;
 import com.example.springbootvueproject.domain.dto.request.MemberRequest;
+import com.example.springbootvueproject.domain.dto.response.TokenDto;
 import com.example.springbootvueproject.domain.dto.response.MemberResponse;
-import com.example.springbootvueproject.domain.dto.response.PostResponse;
+import com.example.springbootvueproject.domain.dto.response.TokenResponse;
 import com.example.springbootvueproject.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "member api",description = "회원 api")
@@ -82,4 +86,17 @@ public class MemberApiController {
         return new ResponseEntity<>("Delete O.k",HttpStatus.OK);
     }
 
+    @Operation(summary = "jwt 로그인",description = "로그인 화면에서 jwt로그인을 실행",method = "Post",tags = {"member api"})
+    @PostMapping("/login")
+    public ResponseEntity<TokenResponse>jwtLogin(@Valid @RequestBody LoginDto loginDto, HttpServletResponse res)throws Exception{
+        TokenResponse response = memberService.signin(loginDto, res);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @Operation(summary = "jwt토큰 재인증",description = "jwt토큰이 만료가 된 경우 refreshToken을 재발행",method = "Post",tags = {"member api"})
+    @PostMapping("/reissue")
+    public ResponseEntity<TokenDto>jwtLoginRefresh(@RequestBody LoginDto loginDto){
+
+        return new ResponseEntity<>(null,HttpStatus.OK);
+    }
 }

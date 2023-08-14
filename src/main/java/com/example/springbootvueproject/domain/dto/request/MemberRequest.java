@@ -1,5 +1,6 @@
 package com.example.springbootvueproject.domain.dto.request;
 
+import com.example.springbootvueproject.domain.Role;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -17,4 +18,5 @@ public class MemberRequest {
     private Integer userAge;
     @NotBlank(message = "회원 이메일을 입력해주세요.")
     private String userEmail;
+    private Role role;
 }

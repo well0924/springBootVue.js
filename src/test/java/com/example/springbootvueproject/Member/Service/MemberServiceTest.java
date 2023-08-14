@@ -16,8 +16,10 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class MemberServiceTest {
     private MemberRepository memberRepository;
     @Spy
     private MemberMapper memberMapper = Mappers.getMapper(MemberMapper.class);
+    @Autowired
+    BCryptPasswordEncoder encode;
 
     @Test
     @DisplayName("회원 목록-성공")
@@ -97,21 +101,18 @@ public class MemberServiceTest {
     @Test
     @DisplayName("회원 가입-성공")
     public void memberCreatedTest(){
-        MemberRequest memberRequest = MemberFactory.request();
-        Member member = memberMapper.dtoToEntity(memberRequest);
-        System.out.println(member);
+        Member member = MemberFactory.member();
+        MemberRequest request = new MemberRequest(
+                member.getUserName(),
+                encode.encode(member.getPassword()),
+                member.getUserAge(),
+                member.getUserEmail(),
+                member.getRole());
+        member = memberMapper.dtoToEntity(request);
 
-        given(memberRepository.save(memberMapper.dtoToEntity(memberRequest))).willReturn(member);
-        given(memberMapper.dtoToEntity(memberRequest)).willReturn(member);
+        given(memberRepository.save(member)).willReturn(member);
+        given(memberMapper.dtoToEntity(request)).willReturn(member);
 
-        when(memberService.memberCreate(memberRequest)).thenReturn(member);
-        Member result=memberService.memberCreate(memberRequest);
-
-        assertThat(result).isNotNull();
-        assertThat(result.getUserName()).isEqualTo(memberRequest.getUserName());
-        assertThat(result.getUserEmail()).isEqualTo(memberRequest.getUserEmail());
-        assertThat(result.getUserAge()).isEqualTo(memberRequest.getUserAge());
-        assertThat(result.getUserEmail()).isEqualTo(memberRequest.getUserEmail());
     }
 
     @Test

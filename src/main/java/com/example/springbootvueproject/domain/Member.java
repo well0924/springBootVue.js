@@ -4,10 +4,7 @@ import com.example.springbootvueproject.config.Base.BaseTime;
 import com.example.springbootvueproject.domain.dto.request.MemberRequest;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,14 +19,17 @@ public class Member extends BaseTime {
     private String password;
     private Integer userAge;
     private String userEmail;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Builder
-    public Member(Long id, String userName,String password,Integer userAge, String userEmail,LocalDateTime createdTime,LocalDateTime updatedTime){
+    public Member(Long id, String userName,String password,Integer userAge, String userEmail,Role role,LocalDateTime createdTime,LocalDateTime updatedTime){
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.userAge = userAge;
         this.userEmail = userEmail;
+        this.role = role;
     }
 
     public void memberUpdate(MemberRequest member){
@@ -38,4 +38,5 @@ public class Member extends BaseTime {
         this.userName = member.getUserName();
         this.userEmail = member.getUserEmail();
     }
+
 }

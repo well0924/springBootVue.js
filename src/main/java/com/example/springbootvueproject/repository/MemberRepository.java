@@ -4,6 +4,8 @@ import com.example.springbootvueproject.domain.Member;
 import com.example.springbootvueproject.repository.custom.MemberCustomRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository extends JpaRepository<Member,Long>,MemberCustomRepository {
+import java.util.Optional;
 
+public interface MemberRepository extends JpaRepository<Member,Long>,MemberCustomRepository {
+    Optional<Member>findByUserName(String username);
 }

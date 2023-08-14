@@ -36,6 +36,17 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa"
     implementation "com.querydsl:querydsl-core"
     implementation "com.querydsl:querydsl-collections"
+    //security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    //jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    // com.sun.xml.bind : jwt
+    implementation 'com.sun.xml.bind:jaxb-impl:4.0.1'
+    implementation 'com.sun.xml.bind:jaxb-core:4.0.1'
+    // javax.xml.bind : jwt
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
     // lombok 에서 mapstruct binding 해주는 기능
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
@@ -49,6 +60,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 // Querydsl 설정부
 def generated = 'src/main/generated'

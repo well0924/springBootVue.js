@@ -47,11 +47,11 @@
 
 - 3일차:
   - [x] post, member 테스트 코드 작성하기.
-  - [x] vue.js 화면(로그인 화면)
   - [x] SpringSecurity 적용
   - [x] jwt 로그인 적용하기.
   - [x] swagger security 설정
 
 - 4일차
+  - [ ] 시큐리티 작동시 예외처리 작동 확인
   - [ ] 화면 완성(게시판 화면)
-  - [ ] 문서 작업
+  - [ ] vue.js 화면(로그인 화면)

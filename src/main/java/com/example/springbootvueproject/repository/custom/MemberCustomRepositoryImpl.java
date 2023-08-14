@@ -54,6 +54,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository{
                     member.getPassword(),
                     member.getUserAge(),
                     member.getUserEmail(),
+                    member.getRole(),
                     member.getCreatedTime(),
                     member.getUpdatedTime());
             responses.add(response);
@@ -72,6 +73,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository{
                     member.getPassword(),
                     member.getUserAge(),
                     member.getUserEmail(),
+                    member.getRole(),
                     member.getCreatedTime(),
                     member.getUpdatedTime());
             responses.add(response);
