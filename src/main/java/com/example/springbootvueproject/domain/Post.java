@@ -8,10 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -24,7 +21,9 @@ public class Post extends BaseTime {
     private String title;
     private String contents;
     private String author;
-    
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_idx")
+    private Member member;
     @Builder
     public Post(Long id,String title,String contents,String author){
         this.id = id;
