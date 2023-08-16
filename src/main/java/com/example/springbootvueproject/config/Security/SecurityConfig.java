@@ -74,6 +74,8 @@ public class SecurityConfig {
         http
                 //csrf 토큰 비활성화 ->jwt 토큰을 사용하기 때문...
                 .csrf().disable()
+                .cors()
+                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//session을 끈다.
                 .and()
