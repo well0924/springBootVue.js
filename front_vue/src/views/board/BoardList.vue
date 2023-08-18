@@ -9,15 +9,15 @@
         <th>No</th>
         <th>제목</th>
         <th>작성자</th>
-        <th>등록일시</th>
+        <th>작성일</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="(row, idx) in list" :key="idx">
-        <td>{{ row.idx }}</td>
-        <td><a v-on:click="fnView(`${row.idx}`)">{{ row.title }}</a></td>
+        <td>{{ row.id }}</td>
+        <td><a v-on:click="fnView(`${row.id}`)">{{ row.title }}</a></td>
         <td>{{ row.author }}</td>
-        <td>{{ row.created_at }}</td>
+        <td>{{row.createdTime}}</td>
       </tr>
       </tbody>
     </table>
@@ -86,17 +86,34 @@ export default {
       }
 
       this.$axios.get(this.$serverUrl + "/api/board/list", {
-        params: this.requestBody,
-        headers: {}
+        headers: { Authorization : localStorage.getItem('user_token') }
       }).then((res) => {
-
-        this.list = res.data  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
+        console.log(res.data.content);
+        this.list = res.data.content  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
 
       }).catch((err) => {
         if (err.message.indexOf('Network Error') > -1) {
           alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
         }
       })
+    },
+    fnView(idx) {//게시글 조회
+      this.requestBody.idx = idx
+      this.$router.push({
+        path: './detail',
+        query: this.requestBody
+      })
+    },
+    fnWrite() {//게시글 작성
+      this.$router.push({
+        path: './create'
+      })
+    },
+    fnPage(n) {//게시글 페이징
+      if (this.page !== n) {
+        this.page = n
+        this.fnGetList()
+      }
     }
   }
 }
