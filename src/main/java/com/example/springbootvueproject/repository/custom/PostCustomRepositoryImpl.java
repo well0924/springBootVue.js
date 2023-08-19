@@ -32,9 +32,25 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
     @Override
     public Page<PostResponse> postList(Pageable pageable) {
         List<PostResponse>postResponseList = new ArrayList<>();
-        List<Post>list = jpaQueryFactory.select(QPost.post).from(QPost.post).fetch();
+        List<Post>list = jpaQueryFactory
+                .select(QPost.post)
+                .from(QPost.post)
+                .orderBy(getAllOrderSpecifiers(pageable.getSort())
+                        .toArray(OrderSpecifier[]::new))
+                .distinct()
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
 
-        int pageCount =jpaQueryFactory.select(QPost.post).from(QPost.post).fetch().size();
+        int pageCount =jpaQueryFactory
+                .select(QPost.post)
+                .from(QPost.post)
+                .orderBy(getAllOrderSpecifiers(pageable.getSort())
+                        .toArray(OrderSpecifier[]::new))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch()
+                .size();
 
         for(Post post:list){
             PostResponse response = new PostResponse(post.getId(),
@@ -80,7 +96,7 @@ public class PostCustomRepositoryImpl implements PostCustomRepository{
                     case c -> postContentsEq(searchVal);
                     case w -> postAuthorEq(searchVal);
                     case i, n, e -> null;
-                    case all -> postContentsEq(searchVal).and(postContentsEq(searchVal)).and(postAuthorEq(searchVal));
+                    case all -> postContentsEq(searchVal).or(postTitleEq(searchVal)).or(postAuthorEq(searchVal));
                 })
                 .orderBy(getAllOrderSpecifiers(pageable.getSort())
                         .toArray(OrderSpecifier[]::new))

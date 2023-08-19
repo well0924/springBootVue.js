@@ -8,12 +8,10 @@ import com.example.springbootvueproject.domain.Role;
 import com.example.springbootvueproject.domain.dto.request.LoginDto;
 import com.example.springbootvueproject.domain.dto.request.MemberRequest;
 import com.example.springbootvueproject.domain.dto.response.MemberResponse;
-import com.example.springbootvueproject.domain.dto.response.TokenDto;
 import com.example.springbootvueproject.domain.dto.response.TokenResponse;
 import com.example.springbootvueproject.mapper.MemberMapperImpl;
 import com.example.springbootvueproject.repository.MemberRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -101,14 +99,10 @@ public class MemberService {
     @Transactional
     public TokenResponse signin(LoginDto loginDto,HttpServletResponse response){
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginDto.getUserName(),
-                            loginDto.getPassword()
-                    )
-            );
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUserName(), loginDto.getPassword()));
 
-            TokenResponse tokenDto = TokenResponse.builder()
+            TokenResponse tokenDto = TokenResponse
+                    .builder()
                     .accessToken(jwtTokenProvider.createAccessToken(authentication))
                     .refreshToken(jwtTokenProvider.createRefreshToken(authentication))
                     .userDetail(authentication.getPrincipal().toString())

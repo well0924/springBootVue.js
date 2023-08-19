@@ -88,14 +88,14 @@ public class MemberApiController {
 
     @Operation(summary = "jwt 로그인",description = "로그인 화면에서 jwt로그인을 실행",method = "Post",tags = {"member api"})
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse>jwtLogin(@Valid @RequestBody LoginDto loginDto, HttpServletResponse res)throws Exception{
+    public ResponseEntity<TokenResponse>jwtLogin(@Valid @RequestBody LoginDto loginDto, HttpServletResponse res){
         TokenResponse response = memberService.signin(loginDto, res);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @Operation(summary = "jwt토큰 재인증",description = "jwt토큰이 만료가 된 경우 refreshToken을 재발행",method = "Post",tags = {"member api"})
+    @Operation(summary = "jwt 토큰 재인증",description = "jwt 토큰이 만료가 된 경우 refreshToken 을 재발행",method = "Post",tags = {"member api"})
     @PostMapping("/reissue")
-    public ResponseEntity<TokenDto>jwtLoginRefresh(@RequestBody LoginDto loginDto){
+    public ResponseEntity<TokenDto>jwtLoginRefresh(@Valid @RequestBody LoginDto loginDto){
 
         return new ResponseEntity<>(null,HttpStatus.OK);
     }

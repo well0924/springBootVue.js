@@ -90,6 +90,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/api/board/post").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.PUT,"/api/board/{id}").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.DELETE,"/api/board/{id}").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST,"/api/login","/api/reissue","/api/created").permitAll()
+                .antMatchers("/api/{id}").permitAll()
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
                 .anyRequest()
                 .authenticated()

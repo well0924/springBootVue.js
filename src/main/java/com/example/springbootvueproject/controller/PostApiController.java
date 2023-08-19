@@ -26,6 +26,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Tag(name = "post api",description = "게시판 컨트롤러")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/board")
 @AllArgsConstructor
 public class PostApiController {
@@ -37,7 +38,7 @@ public class PostApiController {
             @ApiResponse(description = "게시글이 없는 경우",responseCode = "500",content = @Content())
     })
     @GetMapping("/list")
-    public ResponseEntity<Page<PostResponse>>listResponseEntity(@Parameter(hidden = true) @PageableDefault(size = 5,direction = Sort.Direction.DESC) Pageable pageable){
+    public ResponseEntity<Page<PostResponse>>listResponseEntity(@Parameter(hidden = true) @PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
         Page<PostResponse>list = postService.postPagingResponse(pageable);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
